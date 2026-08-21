@@ -175,7 +175,7 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（GitHub Releases）
-  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.0-setup.exe';
+  const DOWNLOAD_URL = 'https://github.com/yxy073795/echo-music/releases/download/v0.2.0/Echo-Music-0.2.0-setup.exe';
   document.getElementById('dl-btn').addEventListener('click', (e) => {
     if (DOWNLOAD_URL) return; // 跳转
     e.preventDefault();
