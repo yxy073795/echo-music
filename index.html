@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Echo Music — 你的音乐，另一种聆听方式</title>
+<meta name="description" content="本地音乐扫描 · AI 歌词翻译 · AI DJ 无缝混音。免费、离线、属于你的私人音乐播放器。" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#hero"><span class="brand-mark">♪</span><span class="brand-name">Echo Music</span></a>
+    <div class="nav-right">
+      <button class="lang-btn" id="lang-btn" title="切换语言">EN</button>
+      <a class="nav-download" href="#download" data-i18n="navDownload">下载</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 首页大图 -->
+  <section class="hero" id="hero">
+    <div class="hero-glow" id="hero-glow"></div>
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-i18n="heroEyebrow">专为本地音乐而生的播放器</div>
+      <h1 class="hero-title" data-i18n="heroTitle">你的音乐，<br/>另一种聆听方式。</h1>
+      <p class="hero-sub" data-i18n="heroSub">本地扫描 · AI 歌词翻译 · AI DJ 无缝混音<br/>一切都在你的电脑上，无需联网，无需账号。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#download" data-i18n="heroCta">下载 Windows 版</a>
+        <a class="btn btn-ghost" href="#features" data-i18n="heroCta2">了解三大亮点</a>
+      </div>
+    </div>
+    <div class="hero-shot">
+      <div class="shot-frame">
+        <img src="assets/img/center.png" alt="Echo Music 播放界面" loading="eager" />
+      </div>
+    </div>
+    <div class="scroll-hint" data-i18n="scrollHint">向下滑动</div>
+  </section>
+
+  <!-- 三大亮点 -->
+  <section class="features" id="features">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="featEyebrow">三大亮点</div>
+      <h2 class="section-title" data-i18n="featTitle">为听歌这件事，重新发明。</h2>
+      <p class="section-sub" data-i18n="featSub">每一处细节，都为「纯粹听歌」而生。</p>
+    </div>
+
+    <!-- 亮点1 本地扫描 -->
+    <article class="feature reveal">
+      <div class="feature-text">
+        <div class="feature-num">01</div>
+        <h3 class="feature-title" data-i18n="f1Title">本地音乐扫描</h3>
+        <p class="feature-desc" data-i18n="f1Desc">自动扫描你电脑里的每一首 MP3，按专辑、歌手、流派整理成你的私人音乐图书馆。不上传、不联网，数据永远属于你。</p>
+        <ul class="feature-points">
+          <li data-i18n="f1p1">双击即用，无需注册</li>
+          <li data-i18n="f1p2">专辑曲目自动按原版顺序归位</li>
+          <li data-i18n="f1p3">液态玻璃界面，专辑库一目了然</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div class="shot-frame shot-scan">
+          <img src="assets/img/scan.png" alt="本地音乐资料库" loading="lazy" />
+        </div>
+      </div>
+    </article>
+
+    <!-- 亮点2 AI 歌词翻译 -->
+    <article class="feature feature-reverse reveal">
+      <div class="feature-text">
+        <div class="feature-num">02</div>
+        <h3 class="feature-title" data-i18n="f2Title">AI 歌词翻译</h3>
+        <p class="feature-desc" data-i18n="f2Desc">实时同步的歌词逐行滚动，DeepSeek AI 自动翻译成中文对照显示。听懂每一句，不止旋律。</p>
+        <ul class="feature-points">
+          <li data-i18n="f2p1">逐行高亮，中英对照</li>
+          <li data-i18n="f2p2">全屏播放页，封面左歌词右</li>
+          <li data-i18n="f2p3">支持居中无歌词的专注模式</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div class="shot-frame shot-lyrics">
+          <img src="assets/img/lyrics.png" alt="AI 歌词翻译" loading="lazy" />
+        </div>
+      </div>
+    </article>
+
+    <!-- 亮点3 AI DJ -->
+    <article class="feature reveal">
+      <div class="feature-text">
+        <div class="feature-num">03</div>
+        <h3 class="feature-title" data-i18n="f3Title">AI DJ 无缝混音</h3>
+        <p class="feature-desc" data-i18n="f3Desc">节拍锁定、乐句对齐、调性匹配——AI DJ 在鼓点中让歌曲自然相融，过渡没有停顿、没有突兀，像一场永不落幕的私人现场。</p>
+        <ul class="feature-points">
+          <li data-i18n="f3p1">BPM 与调性智能匹配</li>
+          <li data-i18n="f3p2">16 拍乐句对齐，变速不变调</li>
+          <li data-i18n="f3p3">Smart Reorder 一键重排播放顺序</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div class="shot-frame video-frame">
+          <video src="assets/video/dj-demo.mp4" autoplay muted loop playsinline preload="auto"></video>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 下载 -->
+  <section class="download" id="download">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="dlEyebrow">免费 · 本地 · 隐私无忧</div>
+      <h2 class="section-title" data-i18n="dlTitle">现在下载</h2>
+      <p class="section-sub" data-i18n="dlSub">仅支持 Windows · 免费 · 无需注册</p>
+    </div>
+    <div class="dl-card reveal">
+      <div class="dl-icon">⬇</div>
+      <div class="dl-name">Echo Music 0.2.0</div>
+      <div class="dl-meta" data-i18n="dlMeta">安装包 73 MB · 支持 Windows 10 / 11</div>
+      <a class="btn btn-primary btn-lg" href="#" id="dl-btn" data-i18n="dlBtn">下载 Echo Music</a>
+      <div class="dl-steps">
+        <div class="step"><span class="step-num">1</span><span data-i18n="step1">点击上方按钮下载安装包</span></div>
+        <div class="step"><span class="step-num">2</span><span data-i18n="step2">双击运行，或解压到任意文件夹</span></div>
+        <div class="step"><span class="step-num">3</span><span data-i18n="step3">打开 Echo Music，开始聆听</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 即将推出 -->
+  <section class="coming-soon" id="coming">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="csEyebrow">即将推出</div>
+      <h2 class="section-title" data-i18n="csTitle">下一步，已经在路上。</h2>
+      <p class="section-sub" data-i18n="csSub">Echo Music 正在变得更好。</p>
+    </div>
+    <div class="cs-grid">
+      <div class="cs-card reveal">
+        <div class="cs-tag" data-i18n="csTag">即将推出</div>
+        <h3 class="cs-title" data-i18n="cs1Title">全网音乐账号互联</h3>
+        <p class="cs-desc" data-i18n="cs1Desc">连接你的全网音乐账号，歌单与收藏随心同步。</p>
+      </div>
+      <div class="cs-card reveal">
+        <div class="cs-tag" data-i18n="csTag">即将推出</div>
+        <h3 class="cs-title" data-i18n="cs2Title">AI DJ 丝滑过渡，更上一层楼</h3>
+        <p class="cs-desc" data-i18n="cs2Desc">更聪明的节拍与调性算法，混音过渡再进化。</p>
+      </div>
+    </div>
+    <div class="ds-link reveal">
+      <span data-i18n="dsText">AI 歌词翻译由 DeepSeek 驱动 · 需要 API Key？</span>
+      <a class="btn btn-ghost ds-btn" href="https://platform.deepseek.com/" target="_blank" rel="noopener" data-i18n="dsBtn">前往获取</a>
+    </div>
+  </section>
+
+  <!-- 联系作者 -->
+  <section class="contact" id="contact">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="ctEyebrow">反馈与建议</div>
+      <h2 class="section-title" data-i18n="ctTitle">联系作者</h2>
+      <p class="section-sub" data-i18n="ctSub">任何问题、想法或希望加入的功能，欢迎随时告诉我。</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="qr-wrap">
+        <div class="qr-box">
+          <img src="assets/img/wechat-qr.png" alt="微信二维码" id="qr-img" />
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-label" data-i18n="wechatLabel">微信号</div>
+        <div class="contact-value" id="wechat-id">a17841655745</div>
+        <div class="contact-tip" data-i18n="ctTip">扫描二维码或搜索微信号，即可联系我</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">♪ Echo Music</div>
+    <div class="footer-tagline" data-i18n="footerTag">你的音乐，另一种聆听方式。</div>
+    <div class="footer-note" data-i18n="footerNote">本地播放 · 免费 · 仅支持 Windows</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
