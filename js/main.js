@@ -55,6 +55,16 @@
       cs2Desc: '更聪明的节拍与调性算法，混音过渡再进化。',
       dsText: 'AI 歌词翻译由 DeepSeek 驱动 · 需要 API Key？',
       dsBtn: '前往获取',
+      clEyebrow: '最新更新',
+      clTitle: 'v0.2.1 更新日志',
+      cl1T: '沉浸式每日推荐首页',
+      cl1D: 'AI 根据你的收听习惯推荐一张专辑，封面居中展示，一键播放整张专辑。',
+      cl2T: '打开即全屏',
+      cl2D: '启动直接全屏，开机动画无缝衔接，不再闪屏。',
+      cl3T: '播放页零动画就位',
+      cl3D: '封面左、歌词右直接呈现，无滑动、不卡顿。',
+      cl4T: '更流畅的播放页',
+      cl4D: '全屏播放页背景不再跟随鼠标，减少重绘，更省资源。',
       footerTag: '你的音乐，另一种聆听方式。',
       footerNote: '本地播放 · 免费 · 仅支持 Windows'
     },
@@ -109,6 +119,16 @@
       cs2Desc: 'Smarter beat & key algorithms for even smoother mixing.',
       dsText: 'AI lyrics translation is powered by DeepSeek · Need an API Key?',
       dsBtn: 'Get one now',
+      clEyebrow: 'Latest Update',
+      clTitle: 'v0.2.1 Changelog',
+      cl1T: 'Immersive Daily Recommendation',
+      cl1D: 'AI recommends an album based on your listening habits, centered cover, one-tap play the whole album.',
+      cl2T: 'Fullscreen on Launch',
+      cl2D: 'Opens directly in fullscreen with a seamless boot animation, no flicker.',
+      cl3T: 'Player Page, Zero Animation',
+      cl3D: 'Cover left, lyrics right — shown instantly, no sliding, no lag.',
+      cl4T: 'Smoother Player Page',
+      cl4D: 'Player background no longer follows the mouse, fewer repaints.',
       footerTag: 'Your music. A different way to listen.',
       footerNote: 'Local playback · Free · Windows only'
     }
@@ -175,7 +195,7 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
-  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.0-setup.exe';
+  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.1-setup.exe';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');

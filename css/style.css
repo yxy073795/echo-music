@@ -201,6 +201,17 @@ section { position: relative; padding: 120px 24px; }
   50% { top: 60%; }
 }
 
+/* ---------- 更新日志 ---------- */
+.changelog { background: linear-gradient(180deg, var(--bg) 0%, #07070b 100%); }
+.cl-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 54px; align-items: center; }
+.cl-shot .shot-frame { box-shadow: 0 44px 110px rgba(0,0,0,0.65); }
+.cl-list { display: flex; flex-direction: column; gap: 24px; }
+.cl-item { display: flex; gap: 15px; align-items: flex-start; }
+.cl-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 8px; background: linear-gradient(135deg,#0a84ff,#5e5ce6); box-shadow: 0 0 12px rgba(10,132,255,0.55); flex-shrink: 0; }
+.cl-item b { display: block; font-size: 16.5px; margin-bottom: 4px; }
+.cl-item p { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+@media (max-width: 860px) { .cl-grid { grid-template-columns: 1fr; gap: 36px; } }
+
 /* ---------- 下载 ---------- */
 .download { background: linear-gradient(180deg, var(--bg) 0%, #07070b 100%); }
 .dl-card {

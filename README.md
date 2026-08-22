@@ -22,11 +22,26 @@
 
 | 方式 | 链接 |
 | --- | --- |
-| 直接下载安装包 | [Echo-Music-0.2.0-setup.exe](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.0-setup.exe)（77 MB） |
-| GitHub Releases | [v0.2.0](https://github.com/yxy073795/echo-music/releases) |
+| 直接下载安装包 | [Echo-Music-0.2.1-setup.exe](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.1-setup.exe)（74 MB） |
+| GitHub Releases | [v0.2.1](https://github.com/yxy073795/echo-music/releases) |
 | 仓库内文件 | [downloads/](https://github.com/yxy073795/echo-music/tree/main/downloads) |
 
-安装：双击安装包，按提示完成即可使用。也可以下载后解压运行绿色版。
+安装：双击安装包，按提示完成即可使用。
+
+## 更新日志
+
+### v0.2.1（最新）
+- **沉浸式每日推荐首页**：AI 根据收听习惯推荐一张专辑，封面居中展示，一键播放整张专辑
+- **打开即全屏**：启动直接全屏，开机动画无缝衔接，不再闪屏
+- **播放页零动画就位**：封面左、歌词右直接呈现，无滑动、不卡顿
+- **更流畅的播放页**：全屏播放页背景不再跟随鼠标，减少重绘
+
+### v0.2.0
+- 专辑曲目按原版顺序排列
+- 「播放专辑」：按曲目顺序完整播放整张专辑
+- 播放队列：查看接下来要播放的歌曲
+- 居中无歌词布局（封面居中）
+- 切歌过渡不卡顿（预解码 + 提前分析）
 
 ## 联系作者
 
