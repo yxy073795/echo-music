@@ -59,7 +59,8 @@ jobs:
           git config user.name "yxy073795"
           git config user.email "yxy073795@users.noreply.github.com"
           git add -f downloads/Echo-Music-0.2.2-mac-universal.dmg
-          git commit -m "update mac universal dmg" || echo "no changes"
+          git -c user.name="yxy073795" -c user.email="yxy073795@users.noreply.github.com" commit -m "update mac universal dmg" || echo "no changes"
+          git pull --rebase origin main || echo "pull skipped"
           git push origin main || echo "push skipped"
   build-win:
     runs-on: windows-latest
