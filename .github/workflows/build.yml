@@ -20,11 +20,23 @@ jobs:
       - name: Install dependencies
         working-directory: app
         run: npm ci || npm install
-      - name: Build macOS (dmg + zip)
+      - name: Build macOS (unpacked)
         working-directory: app
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-        run: npx electron-builder --mac --universal  
+        run: npx electron-builder --mac --universal --dir
+      - name: Ad-hoc codesign (fix malware false positive)
+        run: |
+          find app/dist -name '*.app' -maxdepth 5 | while read app; do
+            codesign --force --deep --sign - "$app" || echo "codesign skipped: $app"
+          done
+      - name: Repackage dmg + zip
+        working-directory: app
+        run: |
+          APP_PATH=$(find dist -name '*.app' -maxdepth 6 | head -1)
+          echo "APP: $APP_PATH"
+          ditto -c -k --keepParent "$APP_PATH" dist/echo-music-mac-universal.zip
+          hdiutil create -volname 'Echo Music' -srcfolder "$APP_PATH" -ov -format UDZO dist/Echo-Music-0.2.2-mac-universal.dmg
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
