@@ -336,3 +336,21 @@ section { position: relative; padding: 120px 24px; }
 .dl-cards .dl-card { margin: 0; max-width: none; }
 .dl-card-mac .dl-icon { background: linear-gradient(135deg, #ff453a, #ff9f0a); box-shadow: 0 10px 30px rgba(255, 69, 58, 0.4); }
 @media (max-width: 760px) { .dl-cards { grid-template-columns: 1fr; } }
+
+/* ---------- hero 双下载按钮 ---------- */
+.hero-btns { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero-btns .btn-mac { background: linear-gradient(135deg, #ff453a, #ff9f0a); box-shadow: 0 10px 30px rgba(255, 69, 58, 0.35); }
+.hero-btns .btn-mac:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(255, 69, 58, 0.45); }
+
+/* ---------- mac 芯片提示 ---------- */
+.dl-mac-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 69, 58, 0.08);
+  border: 1px solid rgba(255, 69, 58, 0.25);
+  color: #ff9f9a;
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: left;
+}
