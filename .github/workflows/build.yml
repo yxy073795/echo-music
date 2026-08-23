@@ -22,23 +22,38 @@ jobs:
       - name: Install dependencies
         working-directory: app
         run: npm ci || npm install
-      - name: Build macOS (unpacked)
+      - name: Build macOS arm64 (unpacked)
         working-directory: app
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-        run: npx electron-builder --mac --universal --dir
-      - name: Ad-hoc codesign (fix malware false positive)
+        run: npx electron-builder --mac --arm64 --dir
+      - name: Ad-hoc codesign arm64
         run: |
           find app/dist -name '*.app' -maxdepth 5 | while read app; do
             codesign --force --deep --sign - "$app" || echo "codesign skipped: $app"
           done
-      - name: Repackage dmg + zip
+      - name: Repackage arm64 dmg
         working-directory: app
         run: |
-          APP_PATH=$(find dist -name '*.app' -maxdepth 6 | head -1)
-          echo "APP: $APP_PATH"
-          ditto -c -k --keepParent "$APP_PATH" dist/echo-music-mac-universal.zip
-          hdiutil create -volname 'Echo Music' -srcfolder "$APP_PATH" -ov -format UDZO dist/Echo-Music-0.2.2-mac-universal.dmg
+          APP_ARM=$(find dist -name '*.app' -maxdepth 6 | head -1)
+          hdiutil create -volname 'Echo Music' -srcfolder "$APP_ARM" -ov -format UDZO dist/Echo-Music-0.2.2-mac-arm64.dmg
+          ditto -c -k --keepParent "$APP_ARM" dist/echo-music-mac-arm64.zip
+      - name: Build macOS x64 (unpacked)
+        working-directory: app
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npx electron-builder --mac --x64 --dir
+      - name: Ad-hoc codesign x64
+        run: |
+          find app/dist -name '*.app' -maxdepth 5 | while read app; do
+            codesign --force --deep --sign - "$app" || echo "codesign skipped: $app"
+          done
+      - name: Repackage x64 dmg
+        working-directory: app
+        run: |
+          APP_X64=$(find dist -name '*.app' -maxdepth 6 | head -1)
+          hdiutil create -volname 'Echo Music' -srcfolder "$APP_X64" -ov -format UDZO dist/Echo-Music-0.2.2-mac-x64.dmg
+          ditto -c -k --keepParent "$APP_X64" dist/echo-music-mac-x64.zip
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -46,40 +61,11 @@ jobs:
           path: |
             app/dist/*.dmg
             app/dist/*.zip
-      - name: Publish to GitHub Release
-        working-directory: app
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push dmgs to repo downloads (fast CDN via Pages)
         run: |
-          gh release upload v0.2.2 dist/echo-music-mac-universal.zip --clobber || true
-          gh release upload v0.2.2 dist/Echo-Music-0.2.2-mac-universal.dmg --clobber || true
-      - name: Push dmg to repo downloads (fast CDN via Pages)
-        run: |
-          cp app/dist/Echo-Music-0.2.2-mac-universal.dmg downloads/Echo-Music-0.2.2-mac-universal.dmg
+          cp app/dist/Echo-Music-0.2.2-mac-arm64.dmg downloads/Echo-Music-0.2.2-mac-arm64.dmg
+          cp app/dist/Echo-Music-0.2.2-mac-x64.dmg downloads/Echo-Music-0.2.2-mac-x64.dmg
           git config user.name "yxy073795"
           git config user.email "yxy073795@users.noreply.github.com"
-          git add -f downloads/Echo-Music-0.2.2-mac-universal.dmg
-          git -c user.name="yxy073795" -c user.email="yxy073795@users.noreply.github.com" commit -m "update mac universal dmg" || echo "no changes"
-          git pull --rebase origin main || echo "pull skipped"
-          git push origin main || echo "push skipped"
-  build-win:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: app/package-lock.json
-      - name: Install dependencies
-        working-directory: app
-        run: npm ci || npm install
-      - name: Build Windows (nsis + portable)
-        working-directory: app
-        run: npx electron-builder --win
-      - name: Upload Windows artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: echo-music-win
-          path: |
-            app/dist/*.exe
+          git add -f downloads/Echo-Music-0.2.2-mac-arm64.dmg downloads/Echo-Music-0.2.2-mac-x64.dmg
+          git -c
