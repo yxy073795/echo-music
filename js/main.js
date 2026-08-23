@@ -209,7 +209,7 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
-  const DOWNLOAD_URL = 'https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-setup.exe';
+  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
   const MAC_URL = 'https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-mac-arm64.zip';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
