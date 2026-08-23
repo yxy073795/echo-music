@@ -34,7 +34,9 @@
       ],
       "category": "public.app-category.music",
       "icon": "build/icon.png",
-      "identity": null
+      "identity": null,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
     },
     "nsis": {
       "oneClick": false,
