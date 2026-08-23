@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.user-data/
+*.log
+screenshot*.png
+test-*.json
+playtest.json
+dj-test.json
+aipick-test.json
+djchat-test.json
+uitest.json
+dom-stats.json
+screenshot-stats.json
+lyrics-test.json
+lyrics-known.json
+marquee-shot.png
