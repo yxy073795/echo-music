@@ -323,3 +323,16 @@ section { position: relative; padding: 120px 24px; }
   .hero-shot { margin-top: 40px; }
   .nav-inner { padding: 12px 18px; }
 }
+
+/* ---------- 双平台下载卡片 ---------- */
+.dl-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+.dl-cards .dl-card { margin: 0; max-width: none; }
+.dl-card-mac .dl-icon { background: linear-gradient(135deg, #ff453a, #ff9f0a); box-shadow: 0 10px 30px rgba(255, 69, 58, 0.4); }
+@media (max-width: 760px) { .dl-cards { grid-template-columns: 1fr; } }
