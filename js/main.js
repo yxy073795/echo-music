@@ -39,9 +39,9 @@
       step1: '点击上方按钮下载安装包',
       step2: '双击运行，或解压到任意文件夹',
       step3: '打开 Echo Music，开始聆听',
-      dlMetaMac: 'DMG 安装包 · macOS 12+ · 支持 Intel 与 Apple 芯片（已签名）',
-      dlBtnMac: '下载 macOS 版',
-      macNote: '首次打开：右键点 Echo Music → 打开 → 仍要打开（避免 Malware 误报，已签名）',
+      dlMetaMac: 'DMG 安装包 · macOS 12+ · Apple 芯片（M1/M2/M3/M4）',
+      dlBtnMac: '下载 macOS 版（Apple 芯片）',
+      macNote: 'Intel Mac 版即将推出 · 首次打开：右键 → 打开 → 仍要打开（已签名）',
       macStep1: '下载压缩包并解压，双击 DMG 文件',
       macStep2: '把 Echo Music 拖入「应用程序」文件夹',
       macStep3: '首次打开：右键点 Echo Music → 打开 → 仍要打开',
@@ -110,9 +110,9 @@
       step1: 'Click the button above to download',
       step2: 'Run the installer, or unzip anywhere',
       step3: 'Open Echo Music and start listening',
-      dlMetaMac: 'DMG installer · macOS 12+ · Intel & Apple Silicon (signed)',
-      dlBtnMac: 'Download for macOS',
-      macNote: 'First launch: right-click Echo Music → Open → Open Anyway (signed, no malware warning)',
+      dlMetaMac: 'DMG installer · macOS 12+ · Apple Silicon (M1/M2/M3/M4)',
+      dlBtnMac: 'Download for macOS (Apple Silicon)',
+      macNote: 'Intel Mac coming soon · First launch: right-click → Open → Open Anyway (signed)',
       macStep1: 'Download and unzip, then double-click the DMG',
       macStep2: 'Drag Echo Music into the Applications folder',
       macStep3: 'First launch: right-click Echo Music → Open → Open Anyway',
@@ -210,7 +210,7 @@
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
   const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
-  const MAC_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-universal.dmg';
+  const MAC_URL = 'https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-mac-arm64.dmg';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');
