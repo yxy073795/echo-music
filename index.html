@@ -30,8 +30,11 @@
       <h1 class="hero-title" data-i18n="heroTitle">你的音乐，<br/>另一种聆听方式。</h1>
       <p class="hero-sub" data-i18n="heroSub">本地扫描 · AI 歌词翻译 · AI DJ 无缝混音<br/>一切都在你的电脑上，无需联网，无需账号。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#download" data-i18n="heroCta">下载 Windows 版</a>
-        <a class="btn btn-ghost" href="#features" data-i18n="heroCta2">了解三大亮点</a>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="#download" data-i18n="heroCta">下载 Windows 版</a>
+          <a class="btn btn-primary btn-mac" href="#download" data-i18n="heroCtaMac">下载 macOS 版</a>
+          <a class="btn btn-ghost" href="#features" data-i18n="heroCta2">了解三大亮点</a>
+        </div>
       </div>
     </div>
     <div class="hero-shot">
@@ -151,8 +154,9 @@
       <div class="dl-card dl-card-mac reveal">
         <div class="dl-icon">🍎</div>
         <div class="dl-name">Echo Music for macOS</div>
-        <div class="dl-meta" data-i18n="dlMetaMac">DMG 安装包 · 支持 macOS 12+</div>
+        <div class="dl-meta" data-i18n="dlMetaMac">DMG 安装包 · macOS 12+ · 目前仅 Apple 芯片（M1/M2/M3）</div>
         <a class="btn btn-primary btn-lg" href="#" id="dl-btn-mac" data-i18n="dlBtnMac">下载 macOS 版</a>
+        <div class="dl-mac-note" data-i18n="macNote">⚠️ Intel Mac 用户暂不可用：需要构建 x64 版，正在准备中</div>
         <div class="dl-steps">
           <div class="step"><span class="step-num">1</span><span data-i18n="macStep1">下载并解压，双击 DMG</span></div>
           <div class="step"><span class="step-num">2</span><span data-i18n="macStep2">把 Echo Music 拖入「应用程序」文件夹</span></div>
