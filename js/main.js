@@ -38,6 +38,11 @@
       step1: '点击上方按钮下载安装包',
       step2: '双击运行，或解压到任意文件夹',
       step3: '打开 Echo Music，开始聆听',
+      dlMetaMac: 'DMG 安装包 · 支持 macOS 12+（未签名，首次打开见下方步骤 3）',
+      dlBtnMac: '下载 macOS 版',
+      macStep1: '下载压缩包并解压，双击 DMG 文件',
+      macStep2: '把 Echo Music 拖入「应用程序」文件夹',
+      macStep3: '首次打开：右键点 Echo Music → 打开 → 仍要打开',
       ctEyebrow: '反馈与建议',
       ctTitle: '联系作者',
       ctSub: '任何问题、想法或希望加入的功能，欢迎随时告诉我。',
@@ -102,6 +107,11 @@
       step1: 'Click the button above to download',
       step2: 'Run the installer, or unzip anywhere',
       step3: 'Open Echo Music and start listening',
+      dlMetaMac: 'DMG installer · macOS 12+ (unsigned, see step 3 on first launch)',
+      dlBtnMac: 'Download for macOS',
+      macStep1: 'Download and unzip, then double-click the DMG',
+      macStep2: 'Drag Echo Music into the Applications folder',
+      macStep3: 'First launch: right-click Echo Music → Open → Open Anyway',
       ctEyebrow: 'Feedback',
       ctTitle: 'Contact the author',
       ctSub: 'Questions, ideas or feature requests — I would love to hear from you.',
@@ -195,13 +205,16 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
-  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.1-setup.exe';
+  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
+  const MAC_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac.zip';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');
-    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.0-setup.exe'); }
+    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
+    const dlBtnMac = document.getElementById('dl-btn-mac');
+    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac.zip'); }
     const navDl = document.querySelector('.nav-download');
-    if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.0-setup.exe'); }
+    if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
   }
   document.getElementById('dl-btn').addEventListener('click', (e) => {
     if (DOWNLOAD_URL) return; // 跳转
