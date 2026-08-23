@@ -112,7 +112,7 @@
   <section class="changelog" id="changelog">
     <div class="section-head reveal">
       <div class="section-eyebrow" data-i18n="clEyebrow">最新更新</div>
-      <h2 class="section-title" data-i18n="clTitle">v0.2.1 更新日志</h2>
+      <h2 class="section-title" data-i18n="clTitle">v0.2.2 更新日志</h2>
     </div>
     <div class="cl-grid reveal">
       <div class="cl-shot">
@@ -121,10 +121,10 @@
         </div>
       </div>
       <div class="cl-list">
-        <div class="cl-item"><span class="cl-dot"></span><div><b data-i18n="cl1T">沉浸式每日推荐首页</b><p data-i18n="cl1D">AI 根据你的收听习惯推荐一张专辑，封面居中展示，一键播放整张专辑。</p></div></div>
-        <div class="cl-item"><span class="cl-dot"></span><div><b data-i18n="cl2T">打开即全屏</b><p data-i18n="cl2D">启动直接全屏，开机动画无缝衔接，不再闪屏。</p></div></div>
-        <div class="cl-item"><span class="cl-dot"></span><div><b data-i18n="cl3T">播放页零动画就位</b><p data-i18n="cl3D">封面左、歌词右直接呈现，无滑动、不卡顿。</p></div></div>
-        <div class="cl-item"><span class="cl-dot"></span><div><b data-i18n="cl4T">更流畅的播放页</b><p data-i18n="cl4D">全屏播放页背景不再跟随鼠标，减少重绘，更省资源。</p></div></div>
+        <div class="cl-item"><span class="cl-dot"></span><div><b>支持更多音频格式</b><p>新增 FLAC / ALAC / M4A / WAV / OGG / APE 等无损格式识别、标签读取与播放，不再只认 MP3。</p></div></div>
+        <div class="cl-item"><span class="cl-dot"></span><div><b>新增 macOS 版</b><p>首个 macOS 版本正式发布，支持 Intel 与 Apple 芯片，功能与 Windows 版完全一致。</p></div></div>
+        <div class="cl-item"><span class="cl-dot"></span><div><b>AI DJ 实时对话</b><p>混音出问题随时跟 AI 说，它会立即调整混音参数并实时生效。</p></div></div>
+        <div class="cl-item"><span class="cl-dot"></span><div><b>AI 挑歌</b><p>告诉 AI 想要的听歌感觉，它从你的曲库挑出适合无缝混音的歌单。</p></div></div>
       </div>
     </div>
   </section>
@@ -136,15 +136,28 @@
       <h2 class="section-title" data-i18n="dlTitle">现在下载</h2>
       <p class="section-sub" data-i18n="dlSub">仅支持 Windows · 免费 · 无需注册</p>
     </div>
-    <div class="dl-card reveal">
-      <div class="dl-icon">⬇</div>
-      <div class="dl-name">Echo Music 0.2.1</div>
-      <div class="dl-meta" data-i18n="dlMeta">安装包 74 MB · 支持 Windows 10 / 11</div>
-      <a class="btn btn-primary btn-lg" href="#" id="dl-btn" data-i18n="dlBtn">下载 Echo Music</a>
-      <div class="dl-steps">
-        <div class="step"><span class="step-num">1</span><span data-i18n="step1">点击上方按钮下载安装包</span></div>
-        <div class="step"><span class="step-num">2</span><span data-i18n="step2">双击运行，或解压到任意文件夹</span></div>
-        <div class="step"><span class="step-num">3</span><span data-i18n="step3">打开 Echo Music，开始聆听</span></div>
+    <div class="dl-cards">
+      <div class="dl-card reveal">
+        <div class="dl-icon">🪟</div>
+        <div class="dl-name">Echo Music for Windows</div>
+        <div class="dl-meta" data-i18n="dlMeta">安装包约 74 MB · 支持 Windows 10 / 11</div>
+        <a class="btn btn-primary btn-lg" href="#" id="dl-btn" data-i18n="dlBtn">下载 Windows 版</a>
+        <div class="dl-steps">
+          <div class="step"><span class="step-num">1</span><span data-i18n="step1">点击上方按钮下载安装包</span></div>
+          <div class="step"><span class="step-num">2</span><span data-i18n="step2">双击运行，或解压到任意文件夹</span></div>
+          <div class="step"><span class="step-num">3</span><span data-i18n="step3">打开 Echo Music，开始聆听</span></div>
+        </div>
+      </div>
+      <div class="dl-card dl-card-mac reveal">
+        <div class="dl-icon">🍎</div>
+        <div class="dl-name">Echo Music for macOS</div>
+        <div class="dl-meta" data-i18n="dlMetaMac">DMG 安装包 · 支持 macOS 12+</div>
+        <a class="btn btn-primary btn-lg" href="#" id="dl-btn-mac" data-i18n="dlBtnMac">下载 macOS 版</a>
+        <div class="dl-steps">
+          <div class="step"><span class="step-num">1</span><span data-i18n="macStep1">下载并解压，双击 DMG</span></div>
+          <div class="step"><span class="step-num">2</span><span data-i18n="macStep2">把 Echo Music 拖入「应用程序」文件夹</span></div>
+          <div class="step"><span class="step-num">3</span><span data-i18n="macStep3">首次打开：右键应用 → 打开 → 仍要打开</span></div>
+        </div>
       </div>
     </div>
   </section>
