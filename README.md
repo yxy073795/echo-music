@@ -24,8 +24,7 @@
 
 | 方式 | 链接 |
 | --- | --- |
-| 直接下载安装包 | [Echo-Music-0.2.2-setup.exe](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe)（74 MB） |
-| 免安装版 | [Echo-Music-0.2.2-portable.exe](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-portable.exe) |
+| 直接下载安装包 | [Echo-Music-0.2.2-setup.exe](https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-setup.exe)（74 MB） |
 | GitHub Releases | [v0.2.2](https://github.com/yxy073795/echo-music/releases) |
 
 安装：双击安装包，按提示完成即可使用。
@@ -34,8 +33,9 @@
 
 | 方式 | 链接 |
 | --- | --- |
-| DMG 安装包 | [Echo-Music-0.2.2-mac.dmg](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac.dmg) |
-| 免安装版 | [Echo-Music-0.2.2-mac.zip](https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac.zip) |
+| DMG 安装包（Apple 芯片） | [Echo-Music-0.2.2-mac-arm64.dmg](https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-mac-arm64.dmg) |
+| 免安装版（Apple 芯片） | [Echo-Music-0.2.2-mac-arm64.zip](https://github.com/yxy073795/echo-music/releases/download/v0.2.2/Echo-Music-0.2.2-mac-arm64.zip) |
+| GitHub Release | [v0.2.2](https://github.com/yxy073795/echo-music/releases) |
 
 macOS 首次打开（未签名应用）：右键点 Echo Music → 打开 → 仍要打开。
 
