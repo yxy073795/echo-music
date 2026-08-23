@@ -10,6 +10,8 @@ on:
 jobs:
   build-mac:
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -44,6 +46,13 @@ jobs:
           path: |
             app/dist/*.dmg
             app/dist/*.zip
+      - name: Publish to GitHub Release
+        working-directory: app
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload v0.2.2 dist/echo-music-mac-universal.zip --clobber || true
+          gh release upload v0.2.2 dist/Echo-Music-0.2.2-mac-universal.dmg --clobber || true
   build-win:
     runs-on: windows-latest
     steps:
