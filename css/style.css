@@ -354,3 +354,9 @@ section { position: relative; padding: 120px 24px; }
   line-height: 1.5;
   text-align: left;
 }
+
+/* ---------- mac 双按钮 ---------- */
+.dl-mac-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.dl-mac-btns .btn-lg { padding: 14px 22px; font-size: 14px; white-space: nowrap; }
+.dl-mac-btns .dl-btn-x64 { background: linear-gradient(180deg, #8B7CF8, #6C5CE7) !important; }
+@media (max-width: 420px) { .dl-mac-btns { flex-direction: column; } }
