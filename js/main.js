@@ -216,7 +216,7 @@
     const dlBtn = document.getElementById('dl-btn');
     if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
     const dlBtnMac = document.getElementById('dl-btn-mac');
-    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac.zip'); }
+    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac-arm64.dmg'); }
     const navDl = document.querySelector('.nav-download');
     if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
   }
