@@ -41,6 +41,7 @@
       step3: '打开 Echo Music，开始聆听',
       dlMetaMac: 'DMG 安装包 · macOS 12+ · Apple 芯片（M1/M2/M3/M4）',
       dlBtnMac: '下载 macOS 版（Apple 芯片）',
+      dlBtnMacX64: '下载 Intel 版',
       macNote: 'Intel Mac 版即将推出 · 首次打开：右键 → 打开 → 仍要打开（已签名）',
       macStep1: '下载压缩包并解压，双击 DMG 文件',
       macStep2: '把 Echo Music 拖入「应用程序」文件夹',
@@ -112,6 +113,7 @@
       step3: 'Open Echo Music and start listening',
       dlMetaMac: 'DMG installer · macOS 12+ · Apple Silicon (M1/M2/M3/M4)',
       dlBtnMac: 'Download for macOS (Apple Silicon)',
+      dlBtnMacX64: 'Download for Intel',
       macNote: 'Intel Mac coming soon · First launch: right-click → Open → Open Anyway (signed)',
       macStep1: 'Download and unzip, then double-click the DMG',
       macStep2: 'Drag Echo Music into the Applications folder',
@@ -210,13 +212,16 @@
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
   const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
-  const MAC_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-arm64.dmg';
+  const MAC_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-arm64.zip';
+  const MAC_URL_X64 = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-x64.zip';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');
     if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
     const dlBtnMac = document.getElementById('dl-btn-mac');
-    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac-arm64.dmg'); }
+    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac-arm64.zip'); }
+    const dlBtnMacX64 = document.getElementById('dl-btn-mac-x64');
+    if (dlBtnMacX64) { dlBtnMacX64.href = MAC_URL_X64; dlBtnMacX64.setAttribute('download', 'Echo-Music-0.2.2-mac-x64.zip'); }
     const navDl = document.querySelector('.nav-download');
     if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
   }
