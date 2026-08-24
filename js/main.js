@@ -10,7 +10,6 @@
       heroTitle: '你的音乐，<br/>另一种聆听方式。',
       heroSub: '本地扫描 · AI 歌词翻译 · AI DJ 无缝混音<br/>一切都在你的电脑上，无需联网，无需账号。',
       heroCta: '下载 Windows 版',
-      heroCtaMac: '下载 macOS 版',
       heroCta2: '了解三大亮点',
       scrollHint: '向下滑动',
       featEyebrow: '三大亮点',
@@ -39,10 +38,6 @@
       step1: '点击上方按钮下载安装包',
       step2: '双击运行，或解压到任意文件夹',
       step3: '打开 Echo Music，开始聆听',
-      dlMetaMac: 'DMG 安装包 · macOS 12+ · Apple 芯片（M1/M2/M3/M4）',
-      dlBtnMac: '下载 macOS 版（Apple 芯片）',
-      dlBtnMacX64: '下载 Intel 版',
-      macNote: 'Intel Mac 版即将推出 · 首次打开：右键 → 打开 → 仍要打开（已签名）',
       macStep1: '下载压缩包并解压，双击 DMG 文件',
       macStep2: '把 Echo Music 拖入「应用程序」文件夹',
       macStep3: '首次打开：右键点 Echo Music → 打开 → 仍要打开',
@@ -82,7 +77,6 @@
       heroTitle: 'Your music.<br/>A different way to listen.',
       heroSub: 'Local scanning · AI lyric translation · Seamless AI DJ mixing<br/>Everything on your computer. No cloud, no account.',
       heroCta: 'Download for Windows',
-      heroCtaMac: 'Download for macOS',
       heroCta2: 'Explore the features',
       scrollHint: 'Scroll to explore',
       featEyebrow: 'Three highlights',
@@ -111,10 +105,6 @@
       step1: 'Click the button above to download',
       step2: 'Run the installer, or unzip anywhere',
       step3: 'Open Echo Music and start listening',
-      dlMetaMac: 'DMG installer · macOS 12+ · Apple Silicon (M1/M2/M3/M4)',
-      dlBtnMac: 'Download for macOS (Apple Silicon)',
-      dlBtnMacX64: 'Download for Intel',
-      macNote: 'Intel Mac coming soon · First launch: right-click → Open → Open Anyway (signed)',
       macStep1: 'Download and unzip, then double-click the DMG',
       macStep2: 'Drag Echo Music into the Applications folder',
       macStep3: 'First launch: right-click Echo Music → Open → Open Anyway',
@@ -211,17 +201,13 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
-  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
-  const MAC_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-arm64.zip';
-  const MAC_URL_X64 = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-mac-x64.zip';
+  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');
-    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
-    const dlBtnMac = document.getElementById('dl-btn-mac');
-    if (dlBtnMac) { dlBtnMac.href = MAC_URL; dlBtnMac.setAttribute('download', 'Echo-Music-0.2.2-mac-arm64.zip'); }
-    const dlBtnMacX64 = document.getElementById('dl-btn-mac-x64');
-    if (dlBtnMacX64) { dlBtnMacX64.href = MAC_URL_X64; dlBtnMacX64.setAttribute('download', 'Echo-Music-0.2.2-mac-x64.zip'); }
+    const dlBtnWeb = document.getElementById('dl-btn-web');
+    if (dlBtnWeb) { dlBtnWeb.href = 'web/index.html'; }
+    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
     const navDl = document.querySelector('.nav-download');
     if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
   }
