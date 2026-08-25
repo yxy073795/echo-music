@@ -209,7 +209,6 @@
     const dlBtnWeb = document.getElementById('dl-btn-web');
     if (dlBtnWeb) { dlBtnWeb.href = 'web/index.html'; }
     if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.3-setup.exe'); }
- 95a96ce (v0.2.3: iOS 26 液态玻璃界面 + AI DJ 全屏对话与语音输入 + 资料库封面 + 移除 mac 版本)
     const navDl = document.querySelector('.nav-download');
     if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.3-setup.exe'); }
   }
