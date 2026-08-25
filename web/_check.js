@@ -11,33 +11,38 @@ function readCoverFromFile(f){
   return new Promise(resolve=>{
     if(!f||!f.size)return resolve(null);
     const reader=new FileReader();
-    // 读前 2MB 足够覆盖大部分 ID3v2 APIC 帧
     reader.onload=()=>{
       try{
         const buf=reader.result;
         const u8=new Uint8Array(buf);
-        const dv=new DataView(buf);
-        // MP3 ID3v2: 开头 "ID3"
         if(u8[0]===0x49&&u8[1]===0x44&&u8[2]===0x33){
           let pos=10;
           const sz=((u8[6]&0x7f)<<21)|((u8[7]&0x7f)<<14)|((u8[8]&0x7f)<<7)|(u8[9]&0x7f);
-          const end=10+sz;
+          const end=Math.min(10+sz, u8.length);
           while(pos+10<=end){
             const fid=String.fromCharCode(u8[pos],u8[pos+1],u8[pos+2],u8[pos+3]);
             const fsz=((u8[pos+4]&0x7f)<<21)|((u8[pos+5]&0x7f)<<14)|((u8[pos+6]&0x7f)<<7)|(u8[pos+7]&0x7f);
             if(fid==="APIC"){
               let p2=pos+10;
-              // 跳过编码字段(1字节) + MIME 字符串 + 图片类型(1字节) + 描述(编码相关)
-              p2++;
+              if(p2+4>end)break;
+              const enc=u8[p2]; p2++;
               const mimeStart=p2;
               while(p2<end&&u8[p2]!==0)p2++;
-              p2++;p2++;
-              // 描述: 根据 ID3v2.4 可能是 UTF-16(0x00 0x00 0x00) 或 0x00
-              if(u8[p2]===0x00&&u8[p2+1]===0x00){p2+=3;}else{p2+=1;}
+              const mime=String.fromCharCode.apply(null,u8.slice(mimeStart,p2));
+              if(u8[p2]===0)p2++;
+              p2++;
+              if(enc===1||enc===2){
+                while(p2+1<end&&!(u8[p2]===0&&u8[p2+1]===0))p2+=2;
+                if(p2+1<end)p2+=2;
+              }else{
+                while(p2<end&&u8[p2]!==0)p2++;
+                if(p2<end)p2++;
+              }
               const imgStart=p2;
               const imgEnd=Math.min(pos+10+fsz,end);
               if(imgEnd>imgStart+16){
-                const blob=new Blob([buf.slice(imgStart,imgEnd)],{type:"image/jpeg"});
+                const mt=mime||"image/jpeg";
+                const blob=new Blob([buf.slice(imgStart,imgEnd)],{type:mt});
                 resolve(URL.createObjectURL(blob));
                 return;
               }
@@ -46,11 +51,41 @@ function readCoverFromFile(f){
             pos+=10+fsz;
           }
         }
+        if(u8[0]===0x66&&u8[1]===0x4c&&u8[2]===0x61&&u8[3]===0x43){
+          let pos=4;
+          for(let i=0;i<128;i++){
+            if(pos+4>u8.length)break;
+            const isLast=(u8[pos]&0x80)!==0;
+            const type=u8[pos]&0x7f;
+            const blen=((u8[pos+1]&0xff)<<16)|((u8[pos+2]&0xff)<<8)|(u8[pos+3]&0xff);
+            if(type===6&&blen>8){
+              const pStart=pos+4;
+              let p2=pStart+4;
+              const mimeLen=(u8[p2+3]<<24)|(u8[p2+2]<<16)|(u8[p2+1]<<8)|u8[p2];
+              p2+=4;
+              const mime=String.fromCharCode.apply(null,u8.slice(p2,p2+mimeLen));
+              p2+=mimeLen;
+              const dlen=(u8[p2+3]<<24)|(u8[p2+2]<<16)|(u8[p2+1]<<8)|u8[p2];
+              p2+=4+dlen;
+              const dataLen=(u8[p2+3]<<24)|(u8[p2+2]<<16)|(u8[p2+1]<<8)|u8[p2];
+              p2+=4;
+              const imgStart=p2;
+              const imgEnd=Math.min(imgStart+dataLen,u8.length);
+              if(imgEnd>imgStart+16){
+                const blob=new Blob([buf.slice(imgStart,imgEnd)],{type:mime||"image/jpeg"});
+                resolve(URL.createObjectURL(blob));
+                return;
+              }
+            }
+            pos+=4+blen;
+            if(isLast)break;
+          }
+        }
         resolve(null);
       }catch(e){resolve(null)}
     };
     reader.onerror=()=>resolve(null);
-    reader.readAsArrayBuffer(f.slice(0,2*1024*1024));
+    reader.readAsArrayBuffer(f.slice(0,3*1024*1024));
   });
 }
 async function importFiles(list){
@@ -129,11 +164,26 @@ function addMsg(c,t){const ch=$("aipc");const d=document.createElement("div");d.
 $("imp").addEventListener("click", async () => {
   if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
     try {
-      const f = document.createElement("input");
-      f.type = "file"; f.accept = "audio/*"; f.multiple = true;
-      f.onchange = () => importFiles(f.files);
-      f.click();
-    } catch (e) { toast("文件选择失败: " + e.message); }
+      const capFilePicker = window.Capacitor.Plugins.FilePicker;
+      if (!capFilePicker) { $("finput").click(); return; }
+      const result = await capFilePicker.pickFiles({ types: ["audio/*"], multiple: true, readData: false });
+      const files = (result && result.files) ? result.files : [];
+      if (!files.length) { toast('未选择文件'); return; }
+      const ex = /\.(mp3|flac|alac|m4a|aac|wav|ogg|oga|opus|ape|wma|aiff|aif)$/i;
+      const audioFiles = files.filter(f => f && f.name && ex.test(f.name));
+      if (!audioFiles.length) { toast('没有音频文件'); return; }
+      toast('正在导入 ' + audioFiles.length + ' 首…');
+      const arr = [];
+      for (const f of audioFiles) {
+        try {
+          const url = f.path ? f.path : (f.uri || f.webPath || f.name);
+          const d = await probe(url);
+          arr.push({ id: f.name, name: f.name.replace(/\.[^.]+$/,''), url: url, duration: d, album: guessAlbum(f.name), artist: guessArtist(f.name), cover: null });
+        } catch (e) {}
+      }
+      if (!arr.length) { toast('导入失败，请重试'); return; }
+      st.songs = arr; st.filtered = arr; render(); toast('已导入 ' + arr.length + ' 首');
+    } catch (e) { toast('文件选择失败: ' + e.message); }
     return;
   }
   $("finput").click();
