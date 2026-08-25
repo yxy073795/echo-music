@@ -201,15 +201,17 @@
   // ---------- 下载按钮 ----------
   // 安装包地址：本地预览可填文件路径，上线后填正式下载链接
   // 安装包直链（github.io 稳定直链）
-  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.2-setup.exe';
+
+  const DOWNLOAD_URL = 'https://yxy073795.github.io/echo-music/downloads/Echo-Music-0.2.3-setup.exe';
   // 让顶部「下载」和下载区按钮都直接指向安装包，并强制浏览器下载（download 属性）
   if (DOWNLOAD_URL) {
     const dlBtn = document.getElementById('dl-btn');
     const dlBtnWeb = document.getElementById('dl-btn-web');
     if (dlBtnWeb) { dlBtnWeb.href = 'web/index.html'; }
-    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
+    if (dlBtn) { dlBtn.href = DOWNLOAD_URL; dlBtn.setAttribute('download', 'Echo-Music-0.2.3-setup.exe'); }
+ 95a96ce (v0.2.3: iOS 26 液态玻璃界面 + AI DJ 全屏对话与语音输入 + 资料库封面 + 移除 mac 版本)
     const navDl = document.querySelector('.nav-download');
-    if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.2-setup.exe'); }
+    if (navDl) { navDl.href = DOWNLOAD_URL; navDl.setAttribute('download', 'Echo-Music-0.2.3-setup.exe'); }
   }
   document.getElementById('dl-btn').addEventListener('click', (e) => {
     if (DOWNLOAD_URL) return; // 跳转
