@@ -111,6 +111,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <button class="tab" data-view="songs">歌曲</button>
     <button class="tab" data-view="albums">专辑</button>
     <button class="tab" data-view="artists">歌手</button>
+    <button class="tab" data-view="dj">AI DJ</button>
   </div>
   <div id="content"></div>
 </div>
@@ -149,6 +150,15 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <button class="fs-btn play" id="fs-play">▶</button>
       <button class="fs-btn" id="fs-next">⏭</button>
     </div>
+  </div>
+</div>
+<!-- AI DJ 对话弹窗 -->
+<div class="modal" id="djmodal">
+  <div class="mcard">
+    <h2>🎧 AI DJ 实时对话</h2>
+    <div class="chat" id="djchat"><div class="msg ai">我是你的 AI DJ 🎧 无缝混音已开启。切歌太快/太慢、音量不对，直接告诉我。</div></div>
+    <div class="cin"><input type="text" id="djinput" placeholder="比如：切太快了，过渡慢一点"><button class="btn" id="djsend">发送</button></div>
+    <div class="macts"><button class="btn ghost" id="djclose">关闭</button></div>
   </div>
 </div>
 <!-- 设置弹窗 -->
@@ -387,7 +397,25 @@ $("pt").addEventListener("dblclick",()=>showModal("setm"));
 document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;if(t.dataset.view==="settings"){showModal("setm")}else if(t.dataset.view==="aipick"){showModal("aipm")}else{hideModal()}});
 document.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="INPUT"){e.preventDefault();tog()}});
 let tt;function toast(m){const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(tt);tt=setTimeout(()=>t.style.display="none",2200)}
+window.__st = st;
+window.__toast = toast;
+window.__render = render;
+window.__audio = audio;
+// 切歌时尝试 DJ 过渡
+const _origPlayIdx = playIdx;
+playIdx = function(i, list) {
+  const l = list || st.filtered;
+  if (window.__dj && window.__dj.on) {
+    if (window.__djTransition && l.length && i >= 0 && i < l.length) {
+      const ok = window.__djTransition(i, l);
+      if (ok) { st.cur = i; st.filtered = l; upUI(); render(); return; }
+    }
+  }
+  _origPlayIdx(i, list);
+};
 render();
+
 </script>
+<script src="dj.js"></script>
 </body>
 </html>

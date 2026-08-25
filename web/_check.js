@@ -215,4 +215,21 @@ $("pt").addEventListener("dblclick",()=>showModal("setm"));
 document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;if(t.dataset.view==="settings"){showModal("setm")}else if(t.dataset.view==="aipick"){showModal("aipm")}else{hideModal()}});
 document.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="INPUT"){e.preventDefault();tog()}});
 let tt;function toast(m){const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(tt);tt=setTimeout(()=>t.style.display="none",2200)}
+window.__st = st;
+window.__toast = toast;
+window.__render = render;
+window.__audio = audio;
+// 切歌时尝试 DJ 过渡
+const _origPlayIdx = playIdx;
+playIdx = function(i, list) {
+  const l = list || st.filtered;
+  if (window.__dj && window.__dj.on) {
+    if (window.__djTransition && l.length && i >= 0 && i < l.length) {
+      const ok = window.__djTransition(i, l);
+      if (ok) { st.cur = i; st.filtered = l; upUI(); render(); return; }
+    }
+  }
+  _origPlayIdx(i, list);
+};
 render();
+
