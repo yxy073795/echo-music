@@ -3,83 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Echo Music 安卓版</title>
+<title>Echo Music</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0b12;color:#f5f5f7;-webkit-user-select:none;user-select:none}
 #app{display:flex;flex-direction:column;height:100dvh;max-width:520px;margin:0 auto}
-.topbar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,255,255,0.04);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid rgba(255,255,255,0.06)}
-.topbar .logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#fa2d48,#ff6b3d);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex-shrink:0}
+/* ===== 液态玻璃工具类 ===== */
+.glass{position:relative;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border:1px solid rgba(255,255,255,0.15);box-shadow:0 4px 24px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(255,255,255,0.06)}
+/* ===== 顶部栏（液态玻璃） ===== */
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 16px;position:relative;z-index:2;background:rgba(255,255,255,0.07);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(255,255,255,0.14);box-shadow:inset 0 1px 0 rgba(255,255,255,0.35)}
+.topbar .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#fa2d48,#ff6b3d);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;flex-shrink:0;box-shadow:0 2px 10px rgba(250,45,72,0.4)}
 .topbar h1{font-size:16px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.topbar .imp-btn{background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;border:none;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;flex-shrink:0}
-.tabs{display:flex;gap:4px;padding:10px 12px;background:rgba(255,255,255,0.03);overflow-x:auto;scrollbar-width:none}
+.topbar .imp-btn{background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;border:none;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;flex-shrink:0;box-shadow:0 2px 12px rgba(250,45,72,0.35)}
+/* ===== 导航标签 ===== */
+.tabs{display:flex;gap:6px;padding:10px 14px;overflow-x:auto;scrollbar-width:none;position:relative;z-index:2;background:rgba(255,255,255,0.04)}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:7px 14px;border-radius:999px;font-size:12.5px;color:#a1a1a6;background:transparent;border:none;white-space:nowrap;flex-shrink:0;transition:all .15s}
-.tab.active{background:rgba(250,45,72,0.2);color:#ff6b6b;font-weight:600}
-#content{flex:1;overflow-y:auto;padding:8px 14px 100px;-webkit-overflow-scrolling:touch}
-.empty{text-align:center;color:#8e8e93;padding:80px 24px;font-size:13.5px;line-height:1.9}
+.tab{padding:7px 15px;border-radius:999px;font-size:12.5px;color:#a1a1a6;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);white-space:nowrap;flex-shrink:0;transition:all .15s;box-shadow:inset 0 1px 0 rgba(255,255,255,0.15)}
+.tab.active{background:rgba(250,45,72,0.22);color:#ff6b6b;font-weight:600;border-color:rgba(250,45,72,0.4)}
+/* ===== 内容区 ===== */
+#content{flex:1;overflow-y:auto;padding:10px 14px 120px;-webkit-overflow-scrolling:touch}
+.empty{text-align:center;color:#8e8e93;padding:70px 24px;font-size:13.5px;line-height:1.9}
 .empty .ic{font-size:52px;margin-bottom:16px}
-.rec-banner{background:linear-gradient(135deg,rgba(250,45,72,0.18),rgba(255,107,61,0.06));border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:18px;margin-bottom:16px;text-align:center}
-.rec-banner .rec-cover{width:min(200px,55%);aspect-ratio:1;border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:44px}
+/* 每日推荐 */
+.rec-banner{position:relative;border-radius:20px;padding:20px;margin-bottom:16px;text-align:center;background:rgba(255,255,255,0.06);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border:1px solid rgba(255,255,255,0.12);box-shadow:0 8px 30px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.3)}
+.rec-banner .rec-cover{width:min(190px,52%);aspect-ratio:1;border-radius:18px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:44px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.25)}
+.rec-banner .rec-cover img{width:100%;height:100%;object-fit:cover}
 .rec-banner h2{font-size:18px;margin-bottom:6px}
 .rec-banner p{color:#a1a1a6;font-size:12.5px;margin-bottom:14px}
-.rec-banner .play-album{background:#fff;color:#111;border:none;padding:8px 22px;border-radius:999px;font-size:13px;font-weight:700}
-.row{display:flex;align-items:center;gap:11px;padding:9px 6px;border-radius:10px;cursor:pointer;transition:background .12s}
-.row:active{background:rgba(255,255,255,0.06)}
+.rec-banner .play-album{background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;border:none;padding:9px 24px;border-radius:999px;font-size:13px;font-weight:700;box-shadow:0 3px 14px rgba(250,45,72,0.4)}
+/* 歌曲行 */
+.row{display:flex;align-items:center;gap:11px;padding:8px 6px;border-radius:12px;cursor:pointer;transition:background .12s}
+.row:active{background:rgba(255,255,255,0.08)}
+.row.playing{background:rgba(250,45,72,0.12)}
 .row.playing .t{color:#ff6b6b}
-.cov-sm{width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff}
+.cov-sm{width:40px;height:40px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.25)}
+.cov-sm img{width:100%;height:100%;object-fit:cover}
 .row .t{flex:1;min-width:0;font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .d{font-size:12px;color:#8e8e93}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:6px 0}
+/* 专辑/歌手网格 */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:6px 0}
 .card{text-align:center;cursor:pointer}
-.card .cov{width:100%;aspect-ratio:1;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;margin-bottom:6px}
+.card .cov{width:100%;aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;margin-bottom:6px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.2)}
+.card .cov img{width:100%;height:100%;object-fit:cover}
 .card .nm{font-size:12px;color:#e5e5ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .ct{font-size:10.5px;color:#8e8e93;margin-top:2px}
-.player-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:50;padding:8px 14px calc(8px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:11px;background:rgba(255,255,255,0.06);backdrop-filter:blur(24px) saturate(1.7);-webkit-backdrop-filter:blur(24px) saturate(1.7);border-top:1px solid rgba(255,255,255,0.12);box-shadow:0 -8px 30px rgba(0,0,0,0.35);cursor:pointer}
-.pb-cover{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
+/* ===== 底部播放胶囊（液态玻璃，Windows 同款） ===== */
+.player-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:50;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:11px;background:rgba(255,255,255,0.08);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);border-top:1px solid rgba(255,255,255,0.16);box-shadow:0 -10px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.35);cursor:pointer}
+.pb-cover{width:46px;height:46px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.25)}
+.pb-cover img{width:100%;height:100%;object-fit:cover}
 .pb-info{flex:1;min-width:0}
 .pb-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pb-artist{font-size:11px;color:#a1a1a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .pb-ctrl{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.pb-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.pb-btn.play{background:rgba(255,255,255,0.2);width:38px;height:38px;font-size:15px}
-.pb-btn:active{background:rgba(255,255,255,0.25)}
+.pb-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.25)}
+.pb-btn.play{background:rgba(255,255,255,0.22);width:40px;height:40px;font-size:15px}
+.pb-btn:active{transform:scale(0.92);background:rgba(255,255,255,0.3)}
+/* ===== 全屏播放页（液态玻璃） ===== */
 .fs{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:radial-gradient(120% 80% at 50% 20%,rgba(108,92,231,0.25),transparent 60%),#0a0b12;padding-top:env(safe-area-inset-top)}
 .fs.show{display:flex}
-.fs-top{display:flex;align-items:center;padding:14px 18px}
-.fs-back{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:16px}
+.fs-top{display:flex;align-items:center;padding:14px 18px;background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+.fs-back{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.25)}
 .fs-top h2{flex:1;text-align:center;font-size:14px;font-weight:600;color:#a1a1a6;margin-right:34px}
 .fs-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 26px;overflow-y:auto}
-.fs-cover{width:min(280px,72%);aspect-ratio:1;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:56px;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);margin-bottom:26px}
+.fs-cover{width:min(280px,72%);aspect-ratio:1;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:56px;color:#fff;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.3);margin-bottom:24px}
+.fs-cover img{width:100%;height:100%;object-fit:cover}
 .fs-info{text-align:center;width:100%}
 .fs-ti{font-size:20px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fs-ar{color:#a1a1a6;font-size:13px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .progress-wrap{width:100%;margin:18px 0 6px}
-.progress{width:100%;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;position:relative;cursor:pointer}
-.progress-fill{position:absolute;left:0;top:0;bottom:0;background:#ff6b6b;border-radius:2px;width:0%}
+.progress{width:100%;height:5px;background:rgba(255,255,255,0.12);border-radius:3px;position:relative;cursor:pointer}
+.progress-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#fa2d48,#ff6b3d);border-radius:3px;width:0%}
 .times{display:flex;justify-content:space-between;font-size:11px;color:#8e8e93;margin-top:5px}
-.fs-lyrics{margin-top:18px;width:100%;max-height:30vh;overflow-y:auto;text-align:center}
+.fs-lyrics{margin-top:18px;width:100%;max-height:28vh;overflow-y:auto;text-align:center}
 .lrc{padding:4px 0;color:#8e8e93;opacity:.6;font-size:13px;line-height:1.6;transition:all .3s}
 .lrc.on{color:#fff;opacity:1;font-size:15px;font-weight:600}
-.fs-controls{display:flex;align-items:center;justify-content:center;gap:28px;margin:22px 0 40px}
-.fs-btn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center}
-.fs-btn.play{width:60px;height:60px;background:#fff;color:#111;font-size:22px}
-.fs-btn:active{transform:scale(0.94)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.fs-controls{display:flex;align-items:center;justify-content:center;gap:30px;margin:22px 0 40px}
+.fs-btn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.25)}
+.fs-btn.play{width:62px;height:62px;background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;font-size:24px;box-shadow:0 6px 24px rgba(250,45,72,0.45)}
+.fs-btn:active{transform:scale(0.92)}
+/* ===== 弹窗（液态玻璃） ===== */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
 .modal.show{display:flex}
-.mcard{background:rgba(22,27,34,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:20px;width:100%;max-width:340px;max-height:80vh;overflow-y:auto}
-.mcard h2{font-size:16px;margin-bottom:12px}
-.mcard input,.mcard textarea{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;color:#fff;font-size:13px;margin-bottom:10px;outline:none}
+.mcard{position:relative;background:rgba(24,26,36,0.85);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgba(255,255,255,0.16);border-radius:20px;padding:22px;width:100%;max-width:360px;max-height:82vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.2)}
+.mcard h2{font-size:16px;margin-bottom:14px}
+.mcard input,.mcard textarea{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:12px;padding:11px 14px;color:#fff;font-size:13px;margin-bottom:10px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1)}
 .mcard input:focus{border-color:rgba(250,45,72,0.5)}
-.macts{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
-.btn{background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;border:none;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer}
-.btn.ghost{background:rgba(255,255,255,0.1);color:#a1a1a6}
-.chat{height:200px;overflow-y:auto;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
+.macts{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.btn{background:linear-gradient(135deg,#fa2d48,#ff6b3d);color:#fff;border:none;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 3px 12px rgba(250,45,72,0.35)}
+.btn.ghost{background:rgba(255,255,255,0.12);color:#a1a1a6;box-shadow:inset 0 1px 0 rgba(255,255,255,0.15)}
+.chat{height:220px;overflow-y:auto;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:10px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
 .msg{max-width:88%;padding:8px 12px;border-radius:12px;font-size:12.5px;line-height:1.5}
-.msg.ai{background:rgba(255,255,255,0.09);align-self:flex-start}
+.msg.ai{background:rgba(255,255,255,0.1);align-self:flex-start}
 .msg.user{background:rgba(250,45,72,0.35);align-self:flex-end}
 .cin{display:flex;gap:8px}.cin input{flex:1;margin:0}
-#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(34,39,46,0.95);color:#fff;padding:9px 18px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);backdrop-filter:blur(10px)}
+#toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:rgba(34,39,46,0.95);color:#fff;padding:10px 20px;border-radius:999px;font-size:12.5px;z-index:300;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);backdrop-filter:blur(10px)}
 </style>
 </head>
 <body>
@@ -94,11 +111,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <button class="tab" data-view="songs">歌曲</button>
     <button class="tab" data-view="albums">专辑</button>
     <button class="tab" data-view="artists">歌手</button>
-    <button class="tab" data-view="aipick">AI 挑歌</button>
-    <button class="tab" data-view="settings">设置</button>
   </div>
   <div id="content"></div>
 </div>
+<!-- 底部播放胶囊（液态玻璃） -->
 <div class="player-bar" id="player-bar">
   <div class="pb-cover" id="pb-cover">♪</div>
   <div class="pb-info">
@@ -111,6 +127,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <button class="pb-btn" id="pb-next">⏭</button>
   </div>
 </div>
+<!-- 全屏播放页 -->
 <div class="fs" id="fs">
   <div class="fs-top">
     <button class="fs-back" id="fs-close">↓</button>
@@ -134,17 +151,19 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     </div>
   </div>
 </div>
+<!-- 设置弹窗 -->
 <div class="modal" id="setm">
   <div class="mcard">
     <h2>⚙️ 设置</h2>
-    <input type="password" id="key" placeholder="DeepSeek API Key（用于 AI 翻译/挑歌）" autocomplete="off">
+    <input type="password" id="key" placeholder="DeepSeek API Key（AI 翻译/挑歌）" autocomplete="off">
     <div class="macts"><button class="btn ghost" id="setc">关闭</button><button class="btn" id="sets">保存</button></div>
   </div>
 </div>
+<!-- AI 挑歌弹窗 -->
 <div class="modal" id="aipm">
   <div class="mcard">
     <h2>🤖 AI 挑歌</h2>
-    <div class="chat" id="aipc"><div class="msg ai">你好，我是你的 AI 选歌 DJ 🎧<br>告诉我你想听什么感觉的歌，我从你的曲库挑给你。</div></div>
+    <div class="chat" id="aipc"><div class="msg ai">你好，我是你的 AI 选歌 DJ 🎧<br>告诉我你想听什么感觉的歌。</div></div>
     <div class="cin"><input type="text" id="aipi" placeholder="比如：来点适合深夜听的安静歌"><button class="btn" id="aips">发送</button></div>
     <div class="macts"><button class="btn ghost" id="aipc2">关闭</button></div>
   </div>
@@ -153,18 +172,73 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <input type="file" id="finput" webkitdirectory directory multiple style="display:none">
 <script>
 const $=id=>document.getElementById(id);
-const st={songs:[],filtered:[],cur:-1,view:"rec",key:localStorage.getItem("echoWebKey")||"",playing:false,recAlbum:null};
+const st={songs:[],filtered:[],cur:-1,view:"rec",key:localStorage.getItem("echoWebKey")||"",playing:false,recAlbum:null,modal:null};
 function fmt(s){if(!isFinite(s))return"0:00";const m=Math.floor(s/60),x=Math.floor(s%60);return m+":"+String(x).padStart(2,"0")}
 function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function guessAlbum(p){const a=(p||"").split("/");return a.length>1?a[0]:"未知专辑"}
 function guessArtist(n){const m=String(n).match(/^(.+?)\s*-\s*/);return m?m[1]:"未知歌手"}
 function probe(u){return new Promise(r=>{const a=new Audio();a.src=u;a.onloadedmetadata=()=>r(a.duration||0);a.onerror=()=>r(0)})}
+/* ===== 封面解析：从 MP3 ID3 / FLAC / M4A 提取内嵌封面 ===== */
+function readCoverFromFile(f){
+  return new Promise(resolve=>{
+    if(!f||!f.size)return resolve(null);
+    const reader=new FileReader();
+    // 读前 2MB 足够覆盖大部分 ID3v2 APIC 帧
+    reader.onload=()=>{
+      try{
+        const buf=reader.result;
+        const u8=new Uint8Array(buf);
+        const dv=new DataView(buf);
+        // MP3 ID3v2: 开头 "ID3"
+        if(u8[0]===0x49&&u8[1]===0x44&&u8[2]===0x33){
+          let pos=10;
+          const sz=((u8[6]&0x7f)<<21)|((u8[7]&0x7f)<<14)|((u8[8]&0x7f)<<7)|(u8[9]&0x7f);
+          const end=10+sz;
+          while(pos+10<=end){
+            const fid=String.fromCharCode(u8[pos],u8[pos+1],u8[pos+2],u8[pos+3]);
+            const fsz=((u8[pos+4]&0x7f)<<21)|((u8[pos+5]&0x7f)<<14)|((u8[pos+6]&0x7f)<<7)|(u8[pos+7]&0x7f);
+            if(fid==="APIC"){
+              let p2=pos+10;
+              // 跳过编码字段(1字节) + MIME 字符串 + 图片类型(1字节) + 描述(编码相关)
+              p2++;
+              const mimeStart=p2;
+              while(p2<end&&u8[p2]!==0)p2++;
+              p2++;p2++;
+              // 描述: 根据 ID3v2.4 可能是 UTF-16(0x00 0x00 0x00) 或 0x00
+              if(u8[p2]===0x00&&u8[p2+1]===0x00){p2+=3;}else{p2+=1;}
+              const imgStart=p2;
+              const imgEnd=Math.min(pos+10+fsz,end);
+              if(imgEnd>imgStart+16){
+                const blob=new Blob([buf.slice(imgStart,imgEnd)],{type:"image/jpeg"});
+                resolve(URL.createObjectURL(blob));
+                return;
+              }
+            }
+            if(fsz<=0)break;
+            pos+=10+fsz;
+          }
+        }
+        resolve(null);
+      }catch(e){resolve(null)}
+    };
+    reader.onerror=()=>resolve(null);
+    reader.readAsArrayBuffer(f.slice(0,2*1024*1024));
+  });
+}
 async function importFiles(list){
   const ex=/\.(mp3|flac|alac|m4a|aac|wav|ogg|oga|opus|ape|wma|aiff|aif)$/i;
   const fs=[...list].filter(f=>ex.test(f.name));
   if(!fs.length){toast("没有音频文件");return}
+  toast("正在导入 "+fs.length+" 首…");
   const arr=[];
-  for(const f of fs){try{const url=URL.createObjectURL(f);const d=await probe(url);arr.push({id:f.webkitRelativePath||f.name,name:f.name.replace(/\.[^.]+$/,""),url,duration:d,album:guessAlbum(f.webkitRelativePath||f.name),artist:guessArtist(f.name)})}catch(e){}}
+  for(const f of fs){
+    try{
+      const url=URL.createObjectURL(f);
+      const d=await probe(url);
+      const cover=await readCoverFromFile(f);
+      arr.push({id:f.webkitRelativePath||f.name,name:f.name.replace(/\.[^.]+$/,""),url,duration:d,album:guessAlbum(f.webkitRelativePath||f.name),artist:guessArtist(f.name),cover:cover});
+    }catch(e){}
+  }
   st.songs=arr;st.filtered=arr;render();toast("已导入 "+arr.length+" 首");
 }
 const audio=new Audio();
@@ -180,14 +254,15 @@ function pv(){if(!st.filtered.length)return;playIdx((st.cur-1+st.filtered.length
 const GR=[["#6c5ce7","#a29bfe"],["#e17055","#fdcb6e"],["#00cec9","#55efc4"],["#0984e3","#74b9ff"],["#d63031","#fab1a0"],["#e84393","#fd79a8"]];
 function grad(n){let h=0;for(const ch of String(n))h=(h*31+ch.charCodeAt(0))%997;const g=GR[h%GR.length];return"linear-gradient(135deg,"+g[0]+","+g[1]+")"}
 function curSong(){return st.cur>=0&&st.filtered[st.cur]?st.filtered[st.cur]:null}
+function coverEl(s,cls){return s&&s.cover?"<img src=\""+s.cover+"\" alt=\"\">":"<span>♪</span>"}
 function upUI(){
   const s=curSong();
   $("pb-play").textContent=audio.paused?"▶":"⏸";$("fs-play").textContent=audio.paused?"▶":"⏸";
   if(s){
     $("pb-title").textContent=s.name;$("pb-artist").textContent=s.artist;
-    $("pb-cover").style.background=grad(s.name);$("pb-cover").textContent="♪";
+    $("pb-cover").style.background=grad(s.name);$("pb-cover").innerHTML=coverEl(s);
     $("fs-ti").textContent=s.name;$("fs-ar").textContent=s.artist;
-    $("fs-cover").style.background=grad(s.name);$("fs-cover").textContent="♪";
+    $("fs-cover").style.background=grad(s.name);$("fs-cover").innerHTML=coverEl(s);
   }
   loadLrc(s);
 }
@@ -195,33 +270,33 @@ audio.addEventListener("timeupdate",()=>{if(audio.duration){$("fil").style.width
 audio.addEventListener("ended",nx);
 audio.addEventListener("play",()=>{st.playing=true;upUI()});
 audio.addEventListener("pause",()=>{st.playing=false;upUI()});
+function showModal(id){st.modal=id;document.querySelectorAll(".modal").forEach(m=>m.classList.remove("show"));$(id).classList.add("show")}
+function hideModal(){st.modal=null;document.querySelectorAll(".modal").forEach(m=>m.classList.remove("show"))}
 function render(){
-  const T={rec:"每日推荐",songs:"所有歌曲",albums:"专辑",artists:"歌手",aipick:"AI 挑歌",settings:"设置"};
+  const T={rec:"每日推荐",songs:"所有歌曲",albums:"专辑",artists:"歌手"};
   $("pt").textContent=T[st.view]||"";
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===st.view));
-  if(st.view==="rec")rr();else if(st.view==="songs")rs();else if(st.view==="albums")ra();else if(st.view==="artists")rp();else if(st.view==="aipick"){$("aipm").classList.add("show");}else if(st.view==="settings"){$("setm").classList.add("show");}
+  if(st.view==="rec")rr();else if(st.view==="songs")rs();else if(st.view==="albums")ra();else if(st.view==="artists")rp();
 }
 function rr(){
   const c=$("content");
-  if(!st.songs.length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>点击右上角「导入音乐」选择你的音乐文件<br>支持 MP3 / FLAC / M4A / WAV 等</p></div>';return}
+  if(!st.songs.length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>点击右上角「导入音乐」批量选择音频文件<br>支持 MP3 / FLAC / M4A / WAV 等，自动读取内嵌封面</p></div>';return}
   const byAlbum={};st.songs.forEach(s=>{const a=s.album||"未知专辑";(byAlbum[a]=byAlbum[a]||[]).push(s)});
   const albums=Object.keys(byAlbum);
   const picked=st.recAlbum&&byAlbum[st.recAlbum]?st.recAlbum:albums[Math.floor(Math.random()*albums.length)];
   st.recAlbum=picked;
   const list=byAlbum[picked];
-  c.innerHTML='<div class="rec-banner"><div class="rec-cover" style="background:'+grad(picked)+'">🎵</div><h2>每日推荐</h2><p>'+esc(picked)+' · '+list.length+' 首</p><button class="play-album" id="rec-play">▶ 播放整张专辑</button></div>'+list.map((s,i)=>'<div class="row" data-i="'+i+'" data-list="rec"><span class="cov-sm" style="background:'+grad(s.name)+'">♪</span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(s.artist)+'</span></div>').join("");
+  c.innerHTML='<div class="rec-banner"><div class="rec-cover" style="background:'+grad(picked)+'">'+(list.find(x=>x.cover)?'<img src="'+list.find(x=>x.cover).cover+'">':'🎵')+'</div><h2>每日推荐</h2><p>'+esc(picked)+' · '+list.length+' 首</p><button class="play-album" id="rec-play">▶ 播放整张专辑</button></div>'+list.map((s,i)=>'<div class="row" data-i="'+i+'" data-list="rec"><span class="cov-sm" style="background:'+grad(s.name)+'">'+coverEl(s)+'</span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(s.artist)+'</span></div>').join("");
 }
-function rs(){const c=$("content");if(!st.filtered.length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>还没有歌曲，先导入音乐吧</p></div>';return}c.innerHTML=st.filtered.map((s,i)=>'<div class="row'+(i===st.cur?" playing":"")+'" data-i="'+i+'"><span class="cov-sm" style="background:'+grad(s.name)+'">♪</span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(s.artist)+'</span></div>').join("")}
-function ra(){const b={};st.songs.forEach(s=>{const a=s.album||"未知专辑";(b[a]=b[a]||[]).push(s)});const c=$("content");if(!Object.keys(b).length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>还没有专辑</p></div>';return}c.innerHTML='<div class="grid">'+Object.keys(b).map((a,i)=>'<div class="card" data-a="'+esc(a)+'"><div class="cov" style="background:'+grad(a)+'">♪</div><div class="nm">'+esc(a)+'</div><div class="ct">'+b[a].length+' 首</div></div>').join("")+"</div>"}
+function rs(){const c=$("content");if(!st.filtered.length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>还没有歌曲，先导入音乐吧</p></div>';return}c.innerHTML=st.filtered.map((s,i)=>'<div class="row'+(i===st.cur?" playing":"")+'" data-i="'+i+'"><span class="cov-sm" style="background:'+grad(s.name)+'">'+coverEl(s)+'</span><span class="t">'+esc(s.name)+'</span><span class="d">'+esc(s.artist)+'</span></div>').join("")}
+function ra(){const b={};st.songs.forEach(s=>{const a=s.album||"未知专辑";(b[a]=b[a]||[]).push(s)});const c=$("content");if(!Object.keys(b).length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>还没有专辑</p></div>';return}c.innerHTML='<div class="grid">'+Object.keys(b).map((a,i)=>'<div class="card" data-a="'+esc(a)+'"><div class="cov" style="background:'+grad(a)+'">'+(b[a].find(x=>x.cover)?'<img src="'+b[a].find(x=>x.cover).cover+'">':'♪')+'</div><div class="nm">'+esc(a)+'</div><div class="ct">'+b[a].length+' 首</div></div>').join("")+"</div>"}
 function rp(){const b={};st.songs.forEach(s=>{const a=s.artist||"未知歌手";(b[a]=b[a]||[]).push(s)});const c=$("content");if(!Object.keys(b).length){c.innerHTML='<div class="empty"><div class="ic">🎵</div><p>还没有歌手</p></div>';return}c.innerHTML='<div class="grid">'+Object.keys(b).map(a=>'<div class="card" data-p="'+esc(a)+'"><div class="cov" style="background:'+grad(a)+'">♪</div><div class="nm">'+esc(a)+'</div><div class="ct">'+b[a].length+' 首</div></div>').join("")+"</div>"}
 let lrcS={lines:[],cur:-1};
 function parseLrc(t){const L=[];const re=/\[([0-9]+):([0-9]+(?:\.[0-9]+)?)\](.*)/g;let m;while((m=re.exec(t)))L.push({t:+m[1]*60+ +m[2],text:m[3].trim()});return L}
 async function loadLrc(s){lrcS={lines:[],cur:-1};const el=$("fs-lyr");if(!s){el.innerHTML='<div class="empty"><p>暂无歌词</p></div>';return}el.innerHTML='<div class="empty"><p>正在获取歌词…</p></div>';try{const l=await fetchLrc(s);if(l){lrcS.lines=parseLrc(l);el.innerHTML=lrcS.lines.length?lrcS.lines.map((x,i)=>'<div class="lrc'+(i===lrcS.cur?" on":"")+'" data-i="'+i+'">'+esc(x.text)+'</div>').join(""):'<div class="empty"><p>暂无歌词</p></div>'}}catch(e){el.innerHTML='<div class="empty"><p>歌词获取失败</p></div>'}}
 async function fetchLrc(s){try{const q=encodeURIComponent(s.name+" "+(s.artist||""));const r=await fetch("https://lrclib.net/api/search?q="+q);const j=await r.json();if(j&&j[0]&&j[0].syncedLyrics)return j[0].syncedLyrics}catch(e){}if(st.key){try{const o=await ds([{role:"system",content:"你是歌词专家。输出歌曲《"+s.name+"》完整歌词，LRC 格式 [mm:ss.xx] 每行一句。只输出 LRC，不要解释。"}],s);if(o)return o}catch(e){}}return null}
-async function trans(){const txt=lrcS.lines.map(l=>l.text).join(String.fromCharCode(10));try{const o=await ds([{role:"system",content:"把下面歌词逐行翻译成中文，保持 LRC 时间戳格式不变：\n"+txt}]);if(o)lrcS.lines=parseLrc(o);const el=$("fs-lyr");if(el)el.innerHTML=lrcS.lines.map((x,i)=>'<div class="lrc'+(i===lrcS.cur?" on":"")+'" data-i="'+i+'">'+esc(x.text)+'</div>').join("")}catch(e){}}
-function upLrc(){if(!lrcS.lines.length)return;const t=audio.currentTime||0;let idx=-1;for(let i=0;i<lrcS.lines.length;i++){if(lrcS.lines[i].t<=t)idx=i;else break}if(idx!==lrcS.cur){lrcS.cur=idx;document.querySelectorAll("#fs-lyr .lrc").forEach(e=>e.classList.toggle("on",+e.dataset.i===idx))}}
 async function ds(ms,mt){if(!st.key)return null;const r=await fetch("https://api.deepseek.com/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+st.key},body:JSON.stringify({model:"deepseek-chat",messages:ms})});if(!r.ok)return null;const j=await r.json();return j.choices&&j.choices[0]?j.choices[0].message.content:null}
-async function aiPick(txt){const q=String(txt||"").trim();if(!q)return;if(!st.key){addMsg("ai","请先在设置填写 API Key");return}addMsg("user",esc(q));addMsg("ai","正在思考…");try{const lib=st.songs.slice(0,200).map(s=>"《"+s.name+"》"+(s.artist||"")).join(String.fromCharCode(10));const o=await ds([{role:"system",content:"你是音乐推荐助手。从用户曲库中挑选适合的歌，输出 JSON：{songs:[\"歌名 - 歌手\"]}，5-10 首。"},{role:"user",content:"曲库：\n"+lib+"\n\n要求："+q}]);if(o){const m=o.match(/\{[\s\S]*\}/);if(m){const names=JSON.parse(m[0]).songs||[];const found=names.map(nm=>{const n=String(nm).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,"");return st.songs.find(s=>(s.name+s.artist).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,"").includes(n)||n.includes((s.name).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,""))) }).filter(Boolean);if(found.length){addMsg("ai",found.map(s=>"♪ "+esc(s.name)+" — "+esc(s.artist)).join("<br>"));st.filtered=found;render();toast("已为你挑出 "+found.length+" 首");return}}addMsg("ai",o.slice(0,300));return}addMsg("ai","没挑到，换个说法试试")}catch(e){addMsg("ai","出错了: "+e.message)}}
+async function aiPick(txt){const q=String(txt||"").trim();if(!q)return;if(!st.key){addMsg("ai","请先在设置填写 API Key");return}addMsg("user",esc(q));addMsg("ai","正在思考…");try{const lib=st.songs.slice(0,200).map(s=>"《"+s.name+"》"+(s.artist||"")).join(String.fromCharCode(10));const o=await ds([{role:"system",content:"你是音乐推荐助手。从用户曲库中挑选适合的歌，输出 JSON 数组：[\"歌名 - 歌手\"]，5-10 首。"},{role:"user",content:"曲库：\n"+lib+"\n\n要求："+q}]);if(o){const m=o.match(/\[[\s\S]*\]/);if(m){const names=JSON.parse(m[0]);const found=names.map(nm=>{const n=String(nm).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,"");return st.songs.find(s=>(s.name+s.artist).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,"").includes(n)||n.includes((s.name).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]/g,""))) }).filter(Boolean);if(found.length){addMsg("ai",found.map(s=>"♪ "+esc(s.name)+" — "+esc(s.artist)).join("<br>"));st.filtered=found;st.view="songs";render();toast("已为你挑出 "+found.length+" 首");return}}addMsg("ai",o.slice(0,300));return}addMsg("ai","没挑到，换个说法试试")}catch(e){addMsg("ai","出错了: "+e.message)}}
 function addMsg(c,t){const ch=$("aipc");const d=document.createElement("div");d.className="msg "+c;d.innerHTML=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight}
 $("imp").addEventListener("click", async () => {
   if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
@@ -236,7 +311,7 @@ $("imp").addEventListener("click", async () => {
   $("finput").click();
 });
 $("finput").addEventListener("change",e=>importFiles(e.target.files));
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{st.view=b.dataset.view;render()}));
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{hideModal();st.view=b.dataset.view;render()}));
 $("content").addEventListener("click",e=>{
   const rp=e.target.closest("#rec-play");if(rp){const byA={};st.songs.forEach(s=>{const a=s.album||"未知专辑";(byA[a]=byA[a]||[]).push(s)});const list=byA[st.recAlbum]||st.songs;playIdx(0,list);return}
   const r=e.target.closest(".row");if(r){const list=r.dataset.list==="rec"?(()=>{const byA={};st.songs.forEach(s=>{const a=s.album||"未知专辑";(byA[a]=byA[a]||[]).push(s)});return byA[st.recAlbum]||st.songs})():st.filtered;playIdx(+r.dataset.i,list);return}
@@ -252,11 +327,14 @@ $("fs-play").addEventListener("click",tog);
 $("fs-next").addEventListener("click",nx);
 $("fs-prev").addEventListener("click",pv);
 $("trk").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const p=(e.clientX-r.left)/r.width;audio.currentTime=p*audio.duration});
-$("setc").addEventListener("click",()=>{$("setm").classList.remove("show");render()});
-$("sets").addEventListener("click",()=>{st.key=$("key").value.trim();localStorage.setItem("echoWebKey",st.key);$("setm").classList.remove("show");render();toast("已保存")});
-$("aipc2").addEventListener("click",()=>{$("aipm").classList.remove("show");render()});
+$("setc").addEventListener("click",hideModal);
+$("sets").addEventListener("click",()=>{st.key=$("key").value.trim();localStorage.setItem("echoWebKey",st.key);hideModal();toast("已保存")});
+$("aipc2").addEventListener("click",hideModal);
 $("aips").addEventListener("click",()=>{const v=$("aipi").value;$("aipi").value="";aiPick(v)});
 $("aipi").addEventListener("keydown",e=>{if(e.key==="Enter"){const v=$("aipi").value;$("aipi").value="";aiPick(v)}});
+// 长按设置打开弹窗（无独立设置页）
+$("pt").addEventListener("dblclick",()=>showModal("setm"));
+document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t)return;if(t.dataset.view==="settings"){showModal("setm")}else if(t.dataset.view==="aipick"){showModal("aipm")}else{hideModal()}});
 document.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="INPUT"){e.preventDefault();tog()}});
 let tt;function toast(m){const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(tt);tt=setTimeout(()=>t.style.display="none",2200)}
 render();
