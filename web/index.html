@@ -87,7 +87,6 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 .btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:9px 18px;border-radius:10px;cursor:pointer;font-size:13px}
 .btn.ghost{background:rgba(255,255,255,.08);color:var(--text2)}
 .chat{height:240px;overflow-y:auto;background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;display:flex;flex-direction:column;gap:8px}
- 95a96ce (v0.2.3: iOS 26 液态玻璃界面 + AI DJ 全屏对话与语音输入 + 资料库封面 + 移除 mac 版本)
 .msg{max-width:85%;padding:8px 12px;border-radius:10px;font-size:12.5px;line-height:1.5}
 .msg.ai{background:rgba(255,255,255,.07);align-self:flex-start}
 .msg.user{background:rgba(108,92,231,.3);align-self:flex-end}
@@ -225,7 +224,18 @@ try{const lib=st.songs.slice(0,200).map(s=>"《"+s.name+"》-"+(s.artist||"?")).
 if(!o){addMsg("ai","没挑到，换个说法");return}const m=o.match(/\{[\s\S]*\}/);if(!m){addMsg("ai",o.slice(0,300));return}const d=JSON.parse(m[0]);let h=d.text||"给你挑好了：";(d.picks||[]).forEach(p=>{const s=st.songs.find(x=>(x.name||"").toLowerCase()===String(p.title||"").toLowerCase());if(s)h+="<br>• "+esc(s.name)+" <span style=color:var(--text2)>("+esc(p.why||"")+")</span>"});addMsg("ai",h)}catch(e){addMsg("ai","失败："+e.message)}}
 
 function addMsg(c,t){const ch=$("aipc");const d=document.createElement("div");d.className="msg "+c;d.innerHTML=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight}
-$("imp").addEventListener("click",()=>$("finput").click());
+$("imp").addEventListener("click", async () => {
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    try {
+      const f = document.createElement("input");
+      f.type = "file"; f.accept = "audio/*"; f.multiple = true;
+      f.onchange = () => importFiles(f.files);
+      f.click();
+    } catch (e) { toast("文件选择失败: " + e.message); }
+    return;
+  }
+  $("finput").click();
+});
 $("finput").addEventListener("change",e=>importFiles(e.target.files));
 $("search").addEventListener("input",e=>{const q=e.target.value.toLowerCase();st.filtered=st.songs.filter(s=>(s.name+" "+s.album+" "+s.artist).toLowerCase().includes(q));if(st.view==="songs")rs()});
 $("content").addEventListener("click",e=>{
